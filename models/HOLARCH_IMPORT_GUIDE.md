@@ -1,36 +1,34 @@
-# Evidence-Attested Agentic Harness — SysML v2 import guide
+# SysML v2 reference model — import guidance
 
-This export contains 13 SysML v2 textual package files representing the architecture, MBSE reference application, requirements, proposed verification cases, trust boundaries, historical-escape evaluation, trade studies, assurance-case limits, and mapping back to 17 white-paper chapters and 20 adversarial-review chapters.
+*Working model baseline · Updated November 2026*
 
-## Option A — Holarch (multi-file)
+This repository contains 13 modular SysML v2 package files plus the consolidated [Evidence_Attested_Agentic_Harness.sysml](Evidence_Attested_Agentic_Harness.sysml). The packages represent proposed trust boundaries, architecture, behavior, requirements, verification objectives, and mappings to the working papers. **They are not an implemented agent, executed test suite, or independent proof of architecture completeness.**
 
-1. Open [Holarch](https://app.holarch.app/), create or sign in to an account, and create a **SysML v2** project.
-2. From **Project Files**, select **Import SysML v2 Files…**.
-3. Select **Evidence_Attested_Agentic_Harness_Holarch.zip**. The ZIP contains only the 13 `.sysml` package files; import them together so cross-package qualified names resolve.
-4. Inspect the preview and diagnostics before applying. Preserve your existing model if you already have one; use a new project when experimenting.
-5. Explore `EAH_Architecture::EvidenceAttestedHarness`, `EAH_Requirements`, `EAH_Verification`, `EAH_MBSE_Reference`, `EAH_AdversarialEvaluation`, and `EAH_DocumentTraceability`.
+## Holarch: possible import destination
 
-## Option B — strict textual checker (single-file)
+The [Holarch sign-in page](https://app.holarch.app/)[^holarch] was reachable in a browser during this audit, but its model-import interface is behind authentication. We have **not** verified the exact menu sequence or successfully imported these files there.
 
-Use the separate **Evidence_Attested_Agentic_Harness.sysml** file with OpenSysML:
+1. Use a new or disposable project for experimentation.
+2. Obtain the 13 `EAH_*.sysml` package files from this repository. If a tool requires a ZIP archive, create one from those files; **no import ZIP is currently committed here**.
+3. Follow the current tool's import process and inspect all diagnostics before applying.
+4. If multi-file references fail, try the consolidated `Evidence_Attested_Agentic_Harness.sysml` as a single-source model.
+5. Document the tool version and any unsupported grammar, namespace, or semantic errors before treating the model as imported.
+
+A tool may implement a subset of the language or interpret constructs differently. This possibility is a compatibility question to test, not a claim about Holarch's current capabilities.
+
+## Strict textual syntax check
+
+A prior pass of the consolidated source using the [MBSE4U SysML v2 checker](https://mbse4u.com/tools/sysml-check/)[^mbse4u] reported no syntax diagnostics for that snapshot. The underlying language is [OMG SysML v2](https://www.omg.org/spec/SysML/2.0)[^sysml]. This audit has **not** rerun a second independent parser or checked alignment with every revision of the white paper.
+
+If you have an appropriate OpenSysML command-line parser installed, a representative *local* syntax-check command is:
 
 ```sh
 sysml -strict -validate Evidence_Attested_Agentic_Harness.sysml
 ```
 
-The full source was also validated with the strict mode of the OpenSysML WebAssembly engine used at [MBSE4U SysML Check](https://mbse4u.com/tools/sysml-check/). The tool reported no parser diagnostics for the exported source. This is a grammar/reference analysis, **not** execution of verification cases or proof of semantic completeness.
+Check the installed version's CLI flags rather than assuming this command works in every distribution.
 
-## Scope and limitations
-
-- The model expresses **proposed** requirements, actions, verification objectives, and assurance boundaries. It is not executable agent software.
-- A graph receipt proves coverage only of a pinned, visible, archived model scope. Missing source links remain a separate and critical failure mode.
-- The first empirical gate is a **no-language-model historical-escape analysis of 20–30 past engineering misses**, classified by whether the missing dependency was present/reachable, present/out of scope, absent from the contemporaneous model, or indeterminate.
-- Risk acknowledgement is per individual action; it never grants permissions or substitutes for a policy-required different-role waiver.
-- The five classifier boundaries, deterministic taint propagation, trusted consent rendering, plan-level effects, and two-stage authorization are modeled as distinct obligations.
-- Holarch explicitly supports a **subset** of SysML v2, so it may report unsupported constructs even when a different strict validator accepts the model. Import compatibility with Holarch is not yet independently confirmed.
-- The trace ledger uses stable document-section IDs and requirement ID strings. They support review but are not executable evidence of complete satisfaction.
-
-The ZIP includes only these 13 source packages:
+## Source inventory
 
 1. `EAH_Common.sysml`
 2. `EAH_Protocols.sysml`
@@ -45,3 +43,13 @@ The ZIP includes only these 13 source packages:
 11. `EAH_DataAndOperations.sysml`
 12. `EAH_AssuranceCase.sysml`
 13. `EAH_DocumentTraceability.sysml`
+
+Cross-tool import, requirement coverage, model semantics, source-graph fidelity, and executable verification remain open. [Known assurance limits](../docs/assurance-boundaries.md) and the [validation plan](../docs/validation.md) take precedence over any unqualified completeness claim.
+
+## Source footnotes and acknowledgements
+
+[^holarch]: Holarch is an external MBSE modeling application. Its public [sign-in page](https://app.holarch.app/) was accessible on November 1, 2026; authenticated import features were not examined.
+
+[^mbse4u]: MBSE4U provides a [SysML v2 checker](https://mbse4u.com/tools/sysml-check/). Acceptance by one parser says nothing by itself about cross-tool conformance or engineering correctness.
+
+[^sysml]: [OMG SysML v2 specification](https://www.omg.org/spec/SysML/2.0) and [official release examples](https://github.com/Systems-Modeling/SysML-v2-Release). Language syntax is distinct from architecture assurance.

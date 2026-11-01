@@ -7,7 +7,7 @@ description: A falsifiable architecture proposal for evidence-gated agentic syst
 
 # Evidence-Gated Agentic Systems
 
-*Independent research by Corey Steinwand · Working white paper v0.1 · November 2026*
+*Personal research by Corey Steinwand · Working white paper v0.2 · November 2026*[^drafting]
 
 > **Research draft, not a product, certification claim, or peer-reviewed result.** The SysML companion is an architectural and verification proposal. Syntax parsing is not execution of its proposed tests. All performance, safety, and business benefits remain unproven.
 
@@ -17,9 +17,9 @@ Probabilistic agents can produce plausible engineering reports without examining
 
 The central contribution under investigation is **a bounded verification contract**. Before an agent reports complete coverage of a defined task, a deterministic mechanism checks the frozen *authorized* graph, the roots and scope approved outside the model, and structured inspection results for each required node and applicable relationship. It records missing work, extra exploration, source gaps, budget exhaustion, and claims that could not be established.
 
-**The critical limitation is source completeness.** A checker can show that an agent examined all modeled dependencies while real engineering dependencies remain absent. The research therefore begins with a no-LLM historical-escape study and compares existing MBSE tools, deterministic graph queries, Codex-style agents, managed agents, and a thin verifier before considering a new harness.
+**The critical limitation is source completeness.** A checker can show that an agent examined all modeled dependencies while real engineering dependencies remain absent. The research therefore begins with a no-LLM historical-escape study and compares existing MBSE tools, deterministic graph queries, Codex-style agents[^codex], managed agents, and a thin verifier before considering a new harness.
 
-The design also explores exact-action risk acknowledgements, mandatory separate-role waivers, deterministic taint propagation, trusted consent rendering, plan-level effect checks, and concise evidence-labeled reports. These are proposed contracts, not claims of unique invention. Existing approaches—including FIDES, provenance standards, assurance cases, and established MBSE/ALM platforms—are material prior art.
+The design also explores exact-action risk acknowledgements, mandatory separate-role waivers, deterministic taint propagation, trusted consent rendering, plan-level effect checks, and concise evidence-labeled reports. These are proposed contracts, not claims of unique invention. Existing approaches—including FIDES[^fides], provenance standards, assurance cases, and established MBSE/ALM platforms—are material prior art.
 
 # 1. Problem Definition and Intended Scope
 
@@ -27,7 +27,7 @@ The design also explores exact-action risk acknowledgements, mandatory separate-
 
 In MBSE, a small change may propagate across requirements, functional decompositions, physical components, interfaces, constraints, and tests. A model that retrieves three plausible dependencies may omit the fourth. If that omission is hidden in a fluent summary, the answer can mislead reviewers.
 
-This is not solely an LLM problem. Engineering organizations already invest in requirements traceability, review, verification, and change-impact analysis. The proposed harness makes those obligations explicit when probabilistic models participate in the workflow. NASA's [systems engineering guidance](https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/) identifies requirements allocation, interfaces, design tradeoffs, and verification as central activities.
+This is not solely an LLM problem. Engineering organizations already invest in requirements traceability, review, verification, and change-impact analysis. The proposed harness makes those obligations explicit when probabilistic models participate in the workflow. NASA's [systems engineering guidance](https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/)[^nasa] identifies requirements allocation, interfaces, design tradeoffs, and verification as central activities.
 
 ## 1.2 Goals
 
@@ -39,7 +39,7 @@ This is not solely an LLM problem. Engineering organizations already invest in r
 
 - Present all findings for an individual action in a single, explainable review package.
 
-- Prove scoped graph traversal accounting through deterministic checks.
+- Deterministically verify scoped graph traversal accounting under explicit contracts.
 
 - Challenge graph results with alternate queries or independent sources.
 
@@ -83,7 +83,7 @@ This system is **not** a universal truth oracle, a replacement for qualified pro
 | Reasoning → memory | Retain provenance, uncertainty, and validation status. |
 | Generated output → user | Ground claims and label unresolved uncertainty. |
 
-This is a defense-in-depth design; prompt injection and excessive agency remain material threats, as identified by [OWASP](https://genai.owasp.org/llm-top-10/).
+This is a defense-in-depth design; prompt injection and excessive agency remain material threats, as identified by [OWASP](https://genai.owasp.org/llm-top-10/)[^owasp].
 
 # 3. Risk Acceptance, Waivers, and Authorization
 
@@ -170,7 +170,7 @@ flowchart TD
     Y -->|No new incident| E["Qualified evidence report"]
 ```
 
-An immediate conversational reply follows durable acceptance; work continues asynchronously with checkpoints and cancellation, retries, and recovery. [Temporal](https://docs.temporal.io/workflow-execution) and existing agent workflow engines are candidates for reuse.
+An immediate conversational reply follows durable acceptance; work continues asynchronously with checkpoints and cancellation, retries, and recovery. [Temporal](https://docs.temporal.io/workflow-execution)[^temporal] and existing agent workflow engines are candidates for reuse.
 
 ## 5.1 Aggregate findings, with explicit exceptions
 
@@ -194,7 +194,7 @@ A graph represents typed engineering entities and modeled relationships. It can 
 
 ## 6.1 Exact graph queries before probabilistic inference
 
-Semantic search and hyperbolic embeddings may help locate candidate contexts, but they do not establish exact directed reachability. Poincaré embeddings describe hierarchical similarity; they do not turn exhaustive multi-hop traversal into constant time. Exact closure using [PostgreSQL recursive queries](https://www.postgresql.org/docs/18/queries-with.html) or established graph query tools is an essential baseline.
+Semantic search and hyperbolic embeddings may help locate candidate contexts, but they do not establish exact directed reachability. Poincaré embeddings[^poincare] describe hierarchical similarity; they do not turn exhaustive multi-hop traversal into constant time. Exact closure using [PostgreSQL recursive queries](https://www.postgresql.org/docs/current/queries-with.html)[^postgres] or established graph query tools is an essential baseline.
 
 ## 6.2 The control-plane-pinned traversal contract
 
@@ -265,7 +265,7 @@ Claim extraction from model-generated prose is itself probabilistic. Checking on
 
 The proposed package records the authorized source snapshot; pinned traversal contract; independently verified per-node dispositions; required and additional graph visits; source-quality and missing-link limitations; conditional independent queries and sibling comparisons; claim-to-source and claim-to-obligation mappings; solver outcomes; policy and waiver decisions; final findings; and unrun checks.
 
-Claims of **cryptographic attestation** require actual signature verification over a canonical payload with signer identity and provenance. Plain JSON, a hash, or a model-authored claim is not proof of tamper-evident process execution. Applicable prior art includes [W3C PROV](https://www.w3.org/TR/prov-o/), [in-toto](https://in-toto.io/docs/specs/), and [SLSA provenance](https://slsa.dev/spec/v1.2/provenance).
+Claims of **cryptographic attestation** require actual signature verification over a canonical payload with signer identity and provenance. Plain JSON, a hash, or a model-authored claim is not proof of tamper-evident process execution. Applicable prior art includes [W3C PROV](https://www.w3.org/TR/prov-o/)[^prov], [in-toto](https://in-toto.io/docs/specs/)[^intoto], and [SLSA provenance](https://slsa.dev/spec/v1.2/provenance)[^slsa].
 
 ## 8.2 Separate assurance questions
 
@@ -280,7 +280,7 @@ Passing one check never silently upgrades another assurance dimension.
 
 # 9. Constraint Checking and Solver Semantics
 
-Use direct deterministic comparisons when sufficient—for example, evaluating `60 V > 48 V` requires no SMT solver. A solver such as [Z3](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/) is useful when numerous encoded constraints interact, especially around satisfiability, logical combinations, and counterexamples.
+Use direct deterministic comparisons when sufficient—for example, evaluating `60 V > 48 V` requires no SMT solver. A solver such as [Z3](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/)[^z3] is useful when numerous encoded constraints interact, especially around satisfiability, logical combinations, and counterexamples.
 
 The output contract distinguishes **SAT** (a satisfying assignment exists under the encoding), **UNSAT** (no assignment exists under that encoding), **UNKNOWN** (the solver cannot establish either), **TIMEOUT** (evaluation was interrupted by the budget), and **NOT RUN**. None is equivalent to universal proof of physical safety, correct requirements translation, or legal authorization.
 
@@ -302,7 +302,7 @@ No approval token alone removes time-of-check/time-of-use races. Version checks,
 
 The harness needs an authoritative record of user inputs, actions, findings, approvals, source versions, and accepted knowledge changes. Semantic embeddings, graph indices, and reporting views may be **projections** of that record rather than independent sources of authority.
 
-A transactional outbox allows a canonical state change and an event describing that change to commit together, with downstream projection workers applying the event later. This is different from a Conflict-free Replicated Data Type (CRDT). CRDTs are appropriate when independently writable replicas must converge under a specified merge rule; they are not required merely to synchronize database projections. [Microsoft's transactional outbox guidance](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-out-box-cosmos) describes the core pattern.
+A transactional outbox allows a canonical state change and an event describing that change to commit together, with downstream projection workers applying the event later. This is different from a Conflict-free Replicated Data Type (CRDT). CRDTs are appropriate when independently writable replicas must converge under a specified merge rule; they are not required merely to synchronize database projections. [Microsoft's transactional outbox guidance](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-out-box-cosmos)[^outbox] describes the core pattern.
 
 ## 11.1 Staleness is a query property
 
@@ -334,7 +334,7 @@ No single model, classifier, solver, or validator can establish all these proper
 
 **Automation bias is a first-class threat.** A read-only report can influence design sign-off, and a green coverage badge may reduce reviewer skepticism. Human studies should compare decisions with and without apparent verification indicators, including deliberately missing source links.
 
-Security designs can draw on [OWASP's LLM risk taxonomy](https://genai.owasp.org/llm-top-10/), [CaMeL's data/control separation research](https://arxiv.org/abs/2503.18813), and [Microsoft FIDES](https://learn.microsoft.com/en-us/agent-framework/agents/security), while distinguishing proposals from measured defense coverage.
+Security designs can draw on [OWASP's LLM risk taxonomy](https://genai.owasp.org/llm-top-10/), [CaMeL's data/control separation research](https://arxiv.org/abs/2503.18813)[^camel], and [Microsoft FIDES](https://learn.microsoft.com/en-us/agent-framework/agents/security), while distinguishing proposals from measured defense coverage.
 
 # 13. MBSE Reference Application: Engineering Change Impact
 
@@ -411,16 +411,17 @@ The architecture combines mechanisms that already exist in several communities. 
 | Precedent | Consequence for this research |
 |:--|:--|
 | [Microsoft FIDES](https://learn.microsoft.com/en-us/agent-framework/agents/security) | Experimental, currently Python-only, and already binds approvals to exact invocations while propagating integrity/confidentiality labels. Reuse or compare directly. |
-| [W3C PROV-O](https://www.w3.org/TR/prov-o/), [in-toto](https://in-toto.io/docs/specs/), [SLSA 1.2](https://slsa.dev/spec/v1.2/) | Existing provenance and attestation models; signed bytes do not establish semantic truth. |
-| [Goal Structuring Notation / assurance cases](https://www.goalstructuringnotation.info/) | Established safety argument patterns, context, assumptions, strategies, and evidence. |
-| [FAA AC 20-115D / DO-178C and DO-330](https://www.faa.gov/airports/resources/advisory_circulars/index.cfm/go/document.information/documentNumber/20-115D) | Aviation tool-use and qualification requirements may be an early adoption barrier, not a later feature. |
-| [ISO 26262](https://www.iso.org/) and [SAE ARP4754 family](https://www.sae.org/) | Sector-specific development assurance processes constrain how automated evidence may affect safety decisions. Applicability must be assessed by a qualified domain authority. |
-| [OSLC specifications](https://open-services.net/specifications/) | Standard tool linking and lifecycle traceability already address many integration needs. |
-| [Bohner and Arnold, *Software Change Impact Analysis*](https://www.wiley.com/) | Established change-impact analysis and over-approximation concerns predate agentic workflows. |
+| [W3C PROV-O](https://www.w3.org/TR/prov-o/), [in-toto](https://in-toto.io/docs/specs/), [SLSA 1.2](https://slsa.dev/spec/v1.2/) | Existing provenance and supply-chain attestation patterns; these are not evidence that an agent reviewed all engineering obligations. |
+| [Goal Structuring Notation / assurance cases](https://scsc.uk/gsn)[^gsn] | Established safety argument patterns, context, assumptions, strategies, and evidence. |
+| [FAA AC 20-115D / DO-178C and DO-330](https://www.faa.gov/airports/resources/advisory_circulars/index.cfm/go/document.information/documentNumber/20-115D)[^faa] | Aviation tool-use and qualification requirements may be an early adoption barrier, not a later feature. |
+| [SAE AIR6276 (2026)](https://saemobilus.sae.org/standards/air6276-use-models-tools-aircraft-systems-development-a-strategy-development-assurance-aspects-examples)[^air6276] | Recent model/tool assurance considerations; not certification of this research. |
+| [ISO 26262-1:2018 (scope/vocabulary)](https://www.iso.org/standard/68383.html)[^iso] and [SAE ARP4754B](https://saemobilus.sae.org/standards/arp4754b-guidelines-development-civil-aircraft-systems)[^sae] | Sector-specific development assurance processes constrain how automated evidence may affect safety decisions. Applicability must be assessed by a qualified domain authority. |
+| [OSLC specifications](https://open-services.net/specifications/)[^oslc] | Standard tool linking and lifecycle traceability already address many integration needs. |
+| [Bohner and Arnold, *Software Change Impact Analysis* (1996)](https://www.wiley-vch.de/en?isbn=9780818673849&option=com_eshop&title=Software+Change+Impact+Analysis&view=product)[^impact] | Established change-impact analysis and its limitations predate agentic workflows; the cited publisher description does not evaluate this proposed architecture. |
 | [CaMeL](https://arxiv.org/abs/2503.18813) | Research on defeating prompt injection through design-level separation of untrusted content and executable authority. |
-| [PTC Codebeamer](https://www.ptc.com/en/products/codebeamer), [Jama Connect](https://www.jamasoftware.com/solutions/requirements-traceability/), [Ansys SAM](https://ansys.synopsys.com/products/connect/ansys-system-architecture-modeler) | Commercial systems already support traceability, impact assessment, AI assistance, or SysML v2 integration. Their capabilities must be measured, not ignored. |
+| [PTC Codebeamer](https://www.ptc.com/en/products/codebeamer)[^codebeamer], [Jama Connect](https://www.jamasoftware.com/solutions/requirements-traceability/)[^jama], [Ansys SAM](https://ansys.synopsys.com/products/connect/ansys-system-architecture-modeler)[^ansys] | Commercial systems already support traceability, impact assessment, AI assistance, or SysML v2[^sysml] integration. Their capabilities must be measured, not ignored. |
 
-The proposed differentiation, if validated, is a **portable, contract-bound method for verifying the completeness and evidentiary limits of an agent-assisted investigation across existing tools**—not a new LLM platform for its own sake.
+The proposed differentiation, if validated, is a **portable, contract-bound method for checking bounded investigation obligations and reporting evidentiary limits across existing tools**—not a new LLM platform for its own sake.
 
 The prior-art comparison asks: **Could deterministic graph queries plus a thin verifier, Codex with scoped tooling, or managed agents achieve the same outcomes at lower cost?** If yes, the broad harness should not be built.
 
@@ -452,7 +453,7 @@ These phases are research tests, not a product delivery schedule.
 
 ## 17.1 Proposed architectural invariants
 
-These are design constraints for the **proposed** system, selected by the independent researcher and still subject to review—not findings validated by an external standards body.
+These are design constraints for the **proposed** system, selected during this personal research and still subject to review—not findings validated by an external standards body.
 
 - Deterministic authority governs permissions, execution, state, evidence labels, and audit.
 - Risk acknowledgement remains possible for every classifier severity but never grants permissions or replaces a policy-required different-role waiver.
@@ -490,24 +491,25 @@ An evidence-gated agent workflow can make its **bounded investigative obligation
 
 The next action is to classify historical engineering escapes against contemporaneous graphs *without an LLM*, test the core failure mode directly, and publish both successes and counterexamples. Building a bespoke harness is a later decision that must be earned by comparison with existing systems.
 
-This document is independent, exploratory research. It is not a product specification, regulatory compliance claim, or safety certification.
+This document is independent, exploratory research. It is not a product specification, regulatory compliance claim, or safety certification. A dated [reference and claim audit]({{ '/reference-audit/' | relative_url }}) records what was checked and what remains unverified.
 
 # References and Existing Implementations
 
-The following sources support the architectural mechanisms, domain context, alternative approaches, and proposed validation methods discussed in this paper. They are grouped by the claims they inform. A linked product or research prototype is **evidence of an existing capability**, not evidence that it already satisfies the entire proposed trust contract.
+The following sources support the architectural mechanisms, domain context, alternative approaches, and proposed validation methods discussed in this paper. They are grouped by the claims they inform. A linked vendor description or research prototype is **evidence that a capability is described or claimed**, not evidence that it already satisfies the entire proposed trust contract.
 
 ## Source map by architectural concern
 
 | Paper sections | Topic and evidence basis | Primary references |
 |:--|:--|:--|
-| 1, 13–14 | Systems engineering, traceability, and early detection of engineering omissions | [NASA Systems Engineering Handbook](https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/); [NASA bidirectional requirements traceability](https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695427/SWE-052%2B-%2BBidirectional%2BTraceability); [NIST digital thread research](https://www.nist.gov/publications/testing-digital-thread-support-model-based-manufacturing-and-inspection) |
-| 2–5, 10, 12 | Agent safety, tool permissions, workflow control, and human review | [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/); [OpenAI guardrails and approvals](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals); [Microsoft Agent Framework approvals](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop) |
-| 5, 10–11 | Durable execution, audit/event delivery, and observability | [Temporal workflow execution](https://docs.temporal.io/workflow-execution); [Microsoft transactional outbox pattern](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-out-box-cosmos); [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) |
-| 6–7 | Exact graph enumeration, schema validation, and approximate similarity | [PostgreSQL recursive queries](https://www.postgresql.org/docs/18/queries-with.html); [W3C SHACL](https://www.w3.org/TR/shacl/); [Poincaré embeddings research](https://ai.meta.com/research/publications/poincare-embeddings-for-learning-hierarchical-representations/) |
-| 8–9 | Evidence scope, satisfiability, and independently checked constraints | [Z3 Guide](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/); [NIST agent evaluation probes](https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai) |
-| 8, 15 | Systematic evidence review and biomedical evidence grounding | [PRISMA 2020](https://www.prisma-statement.org/prisma-2020); [Cochrane searching methods](https://training.cochrane.org/handbook/current/technical-supplement-chapter-4-searching-and-selecting-studies-v63); [GRADE Handbook](https://gdt.gradepro.org/app/handbook/handbook.html); [MedGraphRAG](https://aclanthology.org/2025.acl-long.1381/); [MedCEG](https://aclanthology.org/2026.findings-emnlp.1088/) |
-| 13, 15 | MBSE and lifecycle-platform reference systems | [OMG SysML v2](https://www.omg.org/spec/SysML/2.0); [IBM DOORS Next traceability](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/7.1.0?topic=requirements-traceability); [Siemens Polarion](https://www.siemens.com/en-us/products/polarion/application-lifecycle-management-alm/) |
-| 15–16 | Agent runtime alternatives and orchestration choices | [OpenAI Codex platform](https://developers.openai.com/blog/codex-as-a-platform); [OpenAI Agents SDK](https://developers.openai.com/api/docs/guides/agents/sdk); [Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/workflows/); [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview); [AWS AgentCore policy](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy.html); [Google agent platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview) |
+| 1, 13–14 | Systems engineering, traceability, and early detection of engineering omissions | [NASA Systems Engineering Handbook](https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/); [NASA bidirectional requirements traceability](https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695427/SWE-052%2B-%2BBidirectional%2BTraceability); [NIST digital thread research](https://www.nist.gov/publications/testing-digital-thread-support-model-based-manufacturing-and-inspection)[^nistthread] |
+| 2–5, 10, 12 | Agent safety, tool permissions, workflow control, and human review | [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/); [OpenAI guardrails and approvals](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals); [Microsoft Agent Framework approvals](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop)[^msframework] |
+| 5, 10–11 | Durable execution, audit/event delivery, and observability | [Temporal workflow execution](https://docs.temporal.io/workflow-execution); [Microsoft transactional outbox pattern](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-out-box-cosmos); [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)[^otel] |
+| 6–7 | Exact graph enumeration, schema validation, and approximate similarity | [PostgreSQL recursive queries](https://www.postgresql.org/docs/current/queries-with.html); [W3C SHACL](https://www.w3.org/TR/shacl/)[^shacl]; [Poincaré embeddings research](https://ai.meta.com/research/publications/poincare-embeddings-for-learning-hierarchical-representations/) |
+| 8–9 | Constraint encoding and solver semantics | [Z3 Guide](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/) |
+| 8, 12, 14 | AI response grounding and adversarial evaluation, not deterministic proof | [NIST agent evaluation probes](https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai)[^nistprobes] |
+| 8, 15 | Systematic evidence review and biomedical evidence grounding | [PRISMA 2020](https://www.prisma-statement.org/prisma-2020)[^prisma]; [Cochrane searching methods](https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-04)[^cochrane]; [GRADE Handbook](https://gdt.gradepro.org/app/handbook/handbook.html)[^grade]; [MedGraphRAG](https://aclanthology.org/2025.acl-long.1381/)[^medgraph]; [MedCEG](https://aclanthology.org/2026.findings-emnlp.1088/)[^medceg] |
+| 13, 15 | MBSE and lifecycle-platform reference systems | [OMG SysML v2](https://www.omg.org/spec/SysML/2.0); [IBM DOORS Next traceability](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/7.1.0?topic=requirements-traceability)[^ibm]; [Siemens Polarion](https://www.siemens.com/en-us/products/polarion/application-lifecycle-management-alm/)[^siemens] |
+| 15–16 | Agent runtime alternatives and orchestration choices | [OpenAI Codex platform](https://developers.openai.com/blog/codex-as-a-platform); [OpenAI Agents SDK](https://developers.openai.com/api/docs/guides/agents/sdk)[^agents]; [Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/workflows/); [Microsoft Foundry Agent Service](https://learn.microsoft.com/en-us/azure/foundry/agents/overview)[^foundry]; [AWS AgentCore policy](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy.html)[^aws]; [Google agent platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview)[^google] |
 
 ## Existing agent and workflow implementations
 
@@ -529,19 +531,19 @@ These are concrete options for a buy, compose, or extend approach. Their existen
 
 ## Existing graph, formal, and policy implementations
 
-8. **[PostgreSQL recursive queries](https://www.postgresql.org/docs/18/queries-with.html)** — exact reachability and closure over appropriately modeled relational edges. Work grows with the graph and query; it is not a general constant-time traversal guarantee.
+8. **[PostgreSQL recursive queries](https://www.postgresql.org/docs/current/queries-with.html)** — exact reachability and closure over appropriately modeled relational edges. Work grows with the graph and query; it is not a general constant-time traversal guarantee.
 
 9. **[W3C SHACL](https://www.w3.org/TR/shacl/)** and **[pySHACL source](https://github.com/RDFLib/pySHACL)** — data-shape constraints and validation reports for RDF graphs.
 
-10. **[pgvector source](https://github.com/pgvector/pgvector)** — exact or approximate similarity search in PostgreSQL. Similarity can help discover candidates and analogues; it cannot replace exhaustive traversal.
+10. **[pgvector source](https://github.com/pgvector/pgvector)[^pgvector]** — exact or approximate similarity search in PostgreSQL. Similarity can help discover candidates and analogues; it cannot replace exhaustive traversal.
 
 11. **[Microsoft Z3 source](https://github.com/Z3Prover/z3)** and [programming guide](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/) — formal constraint checks with SAT, UNSAT, and UNKNOWN meanings limited to the supplied encoding.
 
-12. **[Open Policy Agent source](https://github.com/open-policy-agent/opa)** — policy-as-code decision engine for authorization and constraints.
+12. **[Open Policy Agent source](https://github.com/open-policy-agent/opa)[^opa]** — policy-as-code decision engine for authorization and constraints.
 
-13. **[SpiceDB source](https://github.com/authzed/spicedb)** — fine-grained relationship-based authorization; an option to keep actual permissions outside the agent and risk-acknowledgement process.
+13. **[SpiceDB source](https://github.com/authzed/spicedb)[^spicedb]** — fine-grained relationship-based authorization; an option to keep actual permissions outside the agent and risk-acknowledgement process.
 
-14. **[Keycloak source](https://github.com/keycloak/keycloak)** — identity and authentication building block that can coexist with a separate authorization engine.
+14. **[Keycloak source](https://github.com/keycloak/keycloak)[^keycloak]** — identity and authentication building block that can coexist with a separate authorization engine.
 
 15. **[OpenTelemetry Collector](https://opentelemetry.io/docs/collector/)** — transport and processing of traces/logs/metrics; evidence receipts still need application-level semantics and integrity.
 
@@ -553,9 +555,9 @@ These are concrete options for a buy, compose, or extend approach. Their existen
 
 18. **[Siemens Polarion ALM](https://www.siemens.com/en-us/products/polarion/application-lifecycle-management-alm/)** — engineering lifecycle and requirements management.
 
-19. **[PTC Codebeamer](https://www.ptc.com/en/about/facts/codebeamer)** — requirements and application lifecycle management.
+19. **[PTC Codebeamer](https://www.ptc.com/en/products/codebeamer)** — requirements and application lifecycle management.
 
-20. **[CATIA Magic / SysML tooling](https://www.3ds.com/products/catia/catia-magic/sysmlv2)** — model-based systems engineering tooling.
+20. **[CATIA Magic / SysML tooling](https://www.3ds.com/products/catia/catia-magic/sysmlv2)[^catia]** — model-based systems engineering tooling.
 
 21. **[NASA bidirectional traceability](https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695427/SWE-052%2B-%2BBidirectional%2BTraceability)** — domain guidance for trace links, with assumptions and scope to be applied in any engineering-change review.
 
@@ -563,11 +565,11 @@ These are concrete options for a buy, compose, or extend approach. Their existen
 
 22. **[PRISMA 2020](https://www.prisma-statement.org/prisma-2020)** — transparent systematic-review reporting conventions, useful as an analogy for a documented evidence search, not an agent runtime.
 
-23. **[Cochrane Handbook](https://training.cochrane.org/handbook/current/technical-supplement-chapter-4-searching-and-selecting-studies-v63)** — search and study-selection methods that motivate coverage records and explicit exclusions.
+23. **[Cochrane Handbook](https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-04)** — search and study-selection methods that motivate coverage records and explicit exclusions.
 
 24. **[GRADE Handbook](https://gdt.gradepro.org/app/handbook/handbook.html)** — a differentiated evidence-certainty framework; its categories are not directly equivalent to the paper's software assurance status labels.
 
-25. **[Elicit systematic reviews](https://support.elicit.com/en/articles/14759154-systematic-reviews-in-elicit)** — evidence-review workflow example with AI assistance.
+25. **[Elicit systematic reviews](https://support.elicit.com/en/articles/14759154-systematic-reviews-in-elicit)[^elicit]** — evidence-review workflow example with AI assistance.
 
 26. **[MedGraphRAG](https://aclanthology.org/2025.acl-long.1381/)** — biomedical graph-assisted retrieval research, distinct from authoritative graph closure attestations.
 
@@ -592,3 +594,102 @@ These are concrete options for a buy, compose, or extend approach. Their existen
 - **Currency:** provider capabilities and documentation evolve. Reconfirm relevant features and versions before procurement or implementation.
 
 **Companions:** [Adversarial architecture review]({{ '/adversarial-review/' | relative_url }}) · [Assurance boundaries]({{ '/assurance-boundaries/' | relative_url }}) · [Validation protocol]({{ '/validation/' | relative_url }}) · [SysML v2 source](https://github.com/madhatter5501/Exploring-AI-in-MBSE/tree/main/models).
+
+
+## Source footnotes and acknowledgements
+
+These notes acknowledge existing tools, standards, and methods at their first substantive mention. Sources establish only their described scope; they do not validate this research architecture.
+
+[^codex]: OpenAI Codex is a candidate coding-agent host, not a demonstrated MBSE assurance solution. Vendor overview: [Codex as a Platform](https://developers.openai.com/blog/codex-as-a-platform); [source repository](https://github.com/openai/codex).
+
+[^agents]: OpenAI Agents SDK documents tool orchestration, guardrails, approvals, and tracing; it does not certify external engineering-graph completeness. [SDK](https://developers.openai.com/api/docs/guides/agents/sdk); [guardrails and approvals](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals).
+
+[^msframework]: Microsoft's agent framework and workflow documentation provide relevant orchestration and review features; compatibility must be checked by language/runtime version. [Framework](https://learn.microsoft.com/en-us/agent-framework/workflows/); [human-in-the-loop](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop).
+
+[^foundry]: Microsoft Foundry Agent Service is a managed-agent alternative, not an independently validated graph verifier. [Official overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview).
+
+[^aws]: AWS AgentCore provides managed agent capabilities including policy tooling; the exact applicability to this research is untested. [Policy documentation](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy.html).
+
+[^google]: Google's agent tooling is an alternative platform/SDK, not a verified implementation of this research contract. [ADK documentation](https://google.github.io/adk-docs/); [managed platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview).
+
+[^temporal]: Temporal documents durable workflow execution and recovery semantics; this does not by itself verify engineering claims. [Official workflow documentation](https://docs.temporal.io/workflow-execution).
+
+[^postgres]: PostgreSQL supports recursive common-table expressions over modeled relationships. Completeness is conditional on query semantics and source data. [Official recursive-query documentation](https://www.postgresql.org/docs/current/queries-with.html).
+
+[^shacl]: W3C SHACL specifies RDF graph shape constraints; pySHACL is an available implementation. Shape validation does not discover arbitrary absent real-world links. [W3C specification](https://www.w3.org/TR/shacl/); [implementation](https://github.com/RDFLib/pySHACL).
+
+[^z3]: Z3 is a constraint solver. SAT/UNSAT/UNKNOWN apply to the supplied encoding, not physical truth; timeouts need explicit handling. [Z3 programming guide](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/); [source](https://github.com/Z3Prover/z3).
+
+[^fides]: Microsoft Agent Framework FIDES propagates restrictive data labels and can bind an approval to one exact invocation. The documentation states it is experimental and currently Python-only, not available for .NET agents. [Official security documentation](https://learn.microsoft.com/en-us/agent-framework/agents/security).
+
+[^opa]: Open Policy Agent is an existing policy-as-code engine, not a model-evidence validator. [Official source](https://github.com/open-policy-agent/opa).
+
+[^spicedb]: SpiceDB implements relationship-based authorization; authorization remains separate from a user's acknowledgement of a finding. [Official source](https://github.com/authzed/spicedb).
+
+[^keycloak]: Keycloak is an identity/access-management component. Its presence does not imply the domain waiver and consent contracts proposed here. [Official source](https://github.com/keycloak/keycloak).
+
+[^pgvector]: pgvector supports vector similarity search in PostgreSQL; similarity is not graph-closure proof. [Official source](https://github.com/pgvector/pgvector).
+
+[^otel]: OpenTelemetry Collector processes observability data. Trace transport and storage do not establish semantic correctness of an engineering report. [Collector documentation](https://opentelemetry.io/docs/collector/).
+
+[^sysml]: OMG SysML v2 is an established modeling language. Parser acceptance or tool export is not validation of engineering-model semantics. [OMG v2 specification](https://www.omg.org/spec/SysML/2.0); [reference releases](https://github.com/Systems-Modeling/SysML-v2-Release).
+
+[^nasa]: NASA's Systems Engineering Handbook and traceability guidance motivate requirements, interfaces, and verification practice; they do not validate this proposed harness. [Handbook](https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/); [bidirectional traceability guidance](https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695427/SWE-052%2B-%2BBidirectional%2BTraceability).
+
+[^owasp]: OWASP's LLM/GenAI risks identify prompt injection and excessive agency; a risk taxonomy is not a tested mitigation. [Official LLM Top 10](https://genai.owasp.org/llm-top-10/).
+
+[^prov]: W3C PROV-O defines provenance semantics; a provenance record does not alone establish factual correctness or cryptographic signing. [W3C specification](https://www.w3.org/TR/prov-o/).
+
+[^intoto]: in-toto specifies signed supply-chain layout and verification concepts; analogical prior art, not agent answer certification. [Official specification](https://in-toto.io/docs/specs/).
+
+[^slsa]: SLSA v1.2 documents software supply-chain provenance/integrity requirements, not universal truth of model-generated engineering claims. [Specification](https://slsa.dev/spec/v1.2/).
+
+[^gsn]: Goal Structuring Notation (GSN) is established safety/assurance-case notation, maintained by the SCSC working group. The official page opened in a browser, although automated crawlers may face access challenges. [SCSC standards page](https://scsc.uk/gsn).
+
+[^faa]: FAA AC 20-115D recognizes RTCA DO-178C and DO-330, but the circular is an acceptable means rather than a regulation itself. Tool qualification applicability must be decided for the actual use case. [FAA AC 20-115D](https://www.faa.gov/airports/resources/advisory_circulars/index.cfm/go/document.information/documentNumber/20-115D); [RTCA overview](https://www.rtca.org/do-178/).
+
+[^iso]: The linked primary source is ISO 26262-1:2018, the scope/vocabulary part of the road-vehicle functional-safety series. This review did not examine the complete paid standard. [ISO Part 1](https://www.iso.org/standard/68383.html).
+
+[^sae]: SAE ARP4754B is a recommended practice for civil aircraft and systems development; applicability and qualification requirements are domain-specific. [SAE publication](https://saemobilus.sae.org/standards/arp4754b-guidelines-development-civil-aircraft-systems).
+
+[^oslc]: OSLC specifies linked lifecycle resources across tooling; implementation support varies. [Official specifications](https://open-services.net/specifications/).
+
+[^impact]: Robert Arnold and Shawn Bohner edited/authored *Software Change Impact Analysis* (1996), prior art on dependency and traceability analysis; its findings are not a test of this architecture. [Wiley publisher record](https://www.wiley-vch.de/en?isbn=9780818673849&option=com_eshop&title=Software+Change+Impact+Analysis&view=product).
+
+[^camel]: CaMeL's research proposes separating trusted control/data flow from untrusted material to address prompt injection. The research artifact is not a supported security product. [Primary paper](https://arxiv.org/abs/2503.18813); [authors' code](https://github.com/google-research/camel-prompt-injection).
+
+[^codebeamer]: PTC describes Codebeamer requirements, traceability, risk, and ALM features. These are vendor claims, not a verified instance of this research's coverage receipt. [Official product page](https://www.ptc.com/en/products/codebeamer).
+
+[^jama]: Jama Software describes requirements traceability; a feature description is not empirical evidence of independent graph coverage. [Official product information](https://www.jamasoftware.com/solutions/requirements-traceability/).
+
+[^ansys]: Ansys describes SAM's SysML v2 and connected requirements-verification workflows. The vendor page is not independent interoperability testing. [Official product page](https://ansys.synopsys.com/products/connect/ansys-system-architecture-modeler).
+
+[^ibm]: IBM documents DOORS Next trace links, impact analysis, and coverage reporting. The exact documentation URL was indexed but direct automated fetch was restricted during this audit. [IBM traceability documentation](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/7.1.0?topic=requirements-traceability).
+
+[^siemens]: Siemens describes Polarion ALM requirements, workflow and traceability capabilities; feature breadth/versions require hands-on validation. [Official ALM page](https://www.siemens.com/en-us/products/polarion/application-lifecycle-management-alm/).
+
+[^catia]: Dassault describes CATIA SysML v2 modeling and text/diagram synchronization. Conformance percentages on the vendor page are marketing claims and were not independently tested here. [Official page](https://www.3ds.com/products/catia/catia-magic/sysmlv2).
+
+[^medgraph]: MedGraphRAG is biomedical graph-assisted retrieval research; it is not a runtime deterministic traversal receipt. [ACL Anthology paper](https://aclanthology.org/2025.acl-long.1381/).
+
+[^medceg]: MedCEG uses critical evidence graphs for clinical-model training and reward evaluation, not a general runtime permission or coverage gate. [ACL Anthology paper](https://aclanthology.org/2026.findings-emnlp.1088/).
+
+[^nistprobes]: NIST describes adversarial evaluation probes using rubric-based LM judges against curated reference corpora. Do not call them independent deterministic verifiers. [NIST project](https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai).
+
+[^nistthread]: NIST digital-thread research concerns linked engineering/manufacturing data, not a verified agent harness. [NIST publication](https://www.nist.gov/publications/testing-digital-thread-support-model-based-manufacturing-and-inspection).
+
+[^prisma]: PRISMA 2020 supplies systematic-review reporting guidelines, not an agent runtime guarantee. [Official PRISMA statement](https://www.prisma-statement.org/prisma-2020).
+
+[^cochrane]: Cochrane's Handbook describes searching and selecting studies with explicit scope and exclusions; it is a methodological analogy, not an AI product control. [Current Chapter 4](https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-04).
+
+[^grade]: GRADE provides an evidence-certainty framework for reviews; its ratings do not translate directly into software-verification status labels. [GRADE handbook](https://gdt.gradepro.org/app/handbook/handbook.html).
+
+[^elicit]: Elicit offers an AI-assisted systematic-review workflow; performance claims on its own pages are vendor claims. [Help center description](https://support.elicit.com/en/articles/14759154-systematic-reviews-in-elicit).
+
+[^outbox]: The cited Microsoft guidance presents the transactional outbox in a Cosmos DB architecture. The generic concept is useful; the example must not be mistaken for a universal implementation recipe. [Microsoft architecture guidance](https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-out-box-cosmos).
+
+[^poincare]: Poincaré embeddings model hierarchical relationships in hyperbolic space, not exact graph reachability. [Original research](https://ai.meta.com/research/publications/poincare-embeddings-for-learning-hierarchical-representations/).
+
+[^drafting]: Research questions, architectural direction, and project decisions are Corey's personal work. AI assistance was used to structure and draft text, develop the initial SysML representation, and organize the adversarial critique. This is an authorship acknowledgement, not independent source verification or peer review.
+
+[^air6276]: SAE AIR6276 (issued 2026) is a report about risk considerations for models and tools in aircraft systems development. Its full text was not assessed here. [SAE publication](https://saemobilus.sae.org/standards/air6276-use-models-tools-aircraft-systems-development-a-strategy-development-assurance-aspects-examples).

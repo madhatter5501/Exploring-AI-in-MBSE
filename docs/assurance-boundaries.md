@@ -66,7 +66,7 @@ A completeness statement is relative to what the authorized actor could see, and
 - **Attested:** use only where the evidence record's integrity, origin, and signing/verification mechanism are specified and exercised.
 - **Proof-carrying:** avoid claiming formal proof or cryptographic protection without actual formal artifacts, relevant assumptions, and tamper-evident verification.
 
-The SysML v2 file declares proposed requirements and test cases; that is not evidence that the tests have run or that the system exists.
+The SysML v2[^sysml] file declares proposed requirements and test cases; that is not evidence that the tests have run or that the system exists.
 
 ## 8. The human reviewer is in the threat model
 
@@ -75,3 +75,10 @@ A green badge may increase overconfidence and reduce independent scrutiny. The p
 ---
 
 **Next:** [Proposed validation protocol]({{ '/validation/' | relative_url }}) · [White paper]({{ '/whitepaper/' | relative_url }}) · [Adversarial review]({{ '/adversarial-review/' | relative_url }})
+
+
+## Source footnotes and acknowledgements
+
+These notes acknowledge existing tools, standards, and methods at their first substantive mention. Sources establish only their described scope; they do not validate this research architecture.
+
+[^sysml]: OMG SysML v2 is an established modeling language. Parser acceptance or tool export is not validation of engineering-model semantics. [OMG v2 specification](https://www.omg.org/spec/SysML/2.0); [reference releases](https://github.com/Systems-Modeling/SysML-v2-Release).

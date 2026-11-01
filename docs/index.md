@@ -40,7 +40,7 @@ A proposed harness would separate deterministic duties—permissions, task scope
   <div class="card">
     <div class="card-tag">Criticism / Active</div>
     <h3>Adversarial review</h3>
-    <p>Why Codex, managed agents, graph databases, and existing MBSE tools might already be enough.</p>
+    <p>Why Codex[^codex], managed agents, graph databases, and existing MBSE tools might already be enough.</p>
     <a href="{{ '/adversarial-review/' | relative_url }}">Read the counterarguments →</a>
   </div>
   <div class="card">
@@ -51,7 +51,7 @@ A proposed harness would separate deterministic duties—permissions, task scope
   </div>
   <div class="card">
     <div class="card-tag">Formalization / Baseline</div>
-    <h3>SysML v2 architecture</h3>
+    <h3>SysML v2[^sysml] architecture</h3>
     <p>A textual model of the proposed framework, with requirements and verification cases—declared, not executed.</p>
     <a href="{{ '/model/' | relative_url }}">Explore model sources →</a>
   </div>
@@ -76,7 +76,7 @@ A proposed harness would separate deterministic duties—permissions, task scope
 
 <div class="meta-grid">
   <div>
-    <span class="status-pill">Working draft v0.1</span>
+    <span class="status-pill">Working draft v0.2</span>
     <h3>Open to correction</h3>
     <p>Claims are separated into architecture proposals, hypotheses, and observed results. The project presently has no performance results, certified safety argument, or independent peer review.</p>
   </div>
@@ -87,4 +87,13 @@ A proposed harness would separate deterministic duties—permissions, task scope
   </div>
 </div>
 
-[Read the research roadmap]({{ '/roadmap/' | relative_url }}) · [Follow the research log]({{ '/research-log/' | relative_url }}) · [Raise a counterexample](https://github.com/madhatter5501/Exploring-AI-in-MBSE/issues)
+[Read the research roadmap]({{ '/roadmap/' | relative_url }}) · [Review the source audit]({{ '/reference-audit/' | relative_url }}) · [Follow the research log]({{ '/research-log/' | relative_url }}) · [Raise a counterexample](https://github.com/madhatter5501/Exploring-AI-in-MBSE/issues)
+
+
+## Source footnotes and acknowledgements
+
+These notes acknowledge existing tools, standards, and methods at their first substantive mention. Sources establish only their described scope; they do not validate this research architecture.
+
+[^codex]: OpenAI Codex is a candidate coding-agent host, not a demonstrated MBSE assurance solution. Vendor overview: [Codex as a Platform](https://developers.openai.com/blog/codex-as-a-platform); [source repository](https://github.com/openai/codex).
+
+[^sysml]: OMG SysML v2 is an established modeling language. Parser acceptance or tool export is not validation of engineering-model semantics. [OMG v2 specification](https://www.omg.org/spec/SysML/2.0); [reference releases](https://github.com/Systems-Modeling/SysML-v2-Release).

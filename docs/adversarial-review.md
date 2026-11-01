@@ -7,11 +7,11 @@ description: A hard look at why existing agents, MBSE tools, or a small extensio
 
 # Adversarial Architecture Review: Should This Harness Exist?
 
-**Working adversarial critique of the Evidence-Gated Agentic Systems proposal · November 2026**
+**Working adversarial critique of the Evidence-Gated Agentic Systems proposal · November 2026**[^drafting]
 
 > This is an AI-assisted critical analysis prepared as part of the research—not an independent peer review. It challenges an earlier architecture draft; the revised [working white paper]({{ '/whitepaper/' | relative_url }}) now addresses several objections. These remain hypotheses to test, not resolved empirical findings.
 
-**Verdict in advance:** The problem is real. The proposed trust contract is coherent. But the white paper has **not yet established that a new general-purpose agentic harness is necessary**. Most component capabilities exist in Codex, agent SDKs, managed agent services, policy engines, workflow runtimes, graph databases, and MBSE platforms. A smaller, domain-aware **evidence-attestation extension** could deliver much of the benefit at lower engineering and adoption cost. A bespoke harness should be a conclusion earned by a controlled pilot, not the starting assumption.
+**Verdict in advance:** The failure mode is plausible and worth testing. The proposed trust contract is coherent as a design. But the white paper has **not yet established that a new general-purpose agentic harness is necessary**. Many relevant component categories already exist in Codex[^codex], agent SDKs, managed agent services, policy engines, workflow runtimes, graph databases, and MBSE platforms. A smaller, domain-aware **evidence-verification extension** might deliver much of the benefit at lower engineering and adoption cost. A bespoke harness should be a conclusion earned by a controlled pilot, not the starting assumption.
 
 This review deliberately steelmans alternatives and attacks the architecture’s assumptions. It is not a vendor certification or exhaustive procurement comparison. Product capabilities must be rechecked during any actual selection. It distinguishes **(a)** capabilities platforms claim, **(b)** capabilities the proposed system requires, and **(c)** demonstrated gaps. None should be silently substituted for the others.
 
@@ -65,7 +65,7 @@ Primary product reference: [Codex as a platform](https://developers.openai.com/b
 
 # 3. "Why Not OpenAI Agents, Microsoft, AWS, or Google Managed Agents?"
 
-The OpenAI Agents SDK/Agents API, Microsoft's Agent Framework and Foundry Agent Service, AWS Bedrock AgentCore, and Google's agent platform each address portions of tool orchestration, lifecycle management, approvals, identity, policy, or observation. The exact features differ and evolve. It is a mistake to compare a **future complete harness** with only the **lowest-common-denominator** of today's managed offerings.
+The OpenAI Agents SDK[^agents]/Agents API, Microsoft's Agent Framework[^msframework] and Foundry Agent Service[^foundry], AWS Bedrock AgentCore[^aws], and Google's agent platform[^google] each address portions of tool orchestration, lifecycle management, approvals, identity, policy, or observation. The exact features differ and evolve. It is a mistake to compare a **future complete harness** with only the **lowest-common-denominator** of today's managed offerings.
 
 A managed-platform approach looks like this:
 
@@ -85,7 +85,7 @@ Sources: [OpenAI Agents SDK](https://developers.openai.com/api/docs/guides/agent
 
 # 4. "Why Not the MBSE and ALM Tools We Already Own?"
 
-Requirements and engineering-lifecycle tools already provide traceability, baselines, relationship queries, impact analysis, review processes, and evidence of verification to varying degrees. IBM DOORS Next, Siemens Polarion, PTC Codebeamer, and Dassault's CATIA Magic ecosystem are not empty shells waiting for an AI layer.
+Requirements and engineering-lifecycle tools already provide traceability, baselines, relationship queries, impact analysis, review processes, and evidence of verification to varying degrees. IBM DOORS Next[^ibm], Siemens Polarion[^siemens], PTC Codebeamer[^codebeamer], and Dassault's CATIA Magic[^catia] ecosystem are not empty shells waiting for an AI layer.
 
 A skeptical chief engineer will reasonably ask:
 
@@ -99,17 +99,17 @@ A skeptical chief engineer will reasonably ask:
 
 - "If your graph says an edge is missing, do you know whether it is truly required, intentionally absent, or merely hidden by tool permissions?"
 
-The white paper should **not** promise a new MBSE platform. Its wedge is a cross-system, read-only **independent quality-assurance layer** that tests completeness claims and surfaces inconsistencies that existing tooling can express but teams fail to check systematically.
+The white paper should **not** promise a new MBSE platform. Its testable wedge is a cross-system, read-only **separately governed quality-assurance layer** that tests completeness claims and surfaces inconsistencies that existing tooling can express but teams fail to check systematically.
 
-A valuable product might simply issue a change-impact evidence packet back into an existing ALM review, where the approved baseline and action authority already live.
+A useful pilot might simply issue a change-impact evidence packet back into an existing ALM review, where the approved baseline and action authority already live.
 
-Sources: [IBM DOORS traceability](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/7.1.0?topic=requirements-traceability), [Siemens Polarion](https://www.siemens.com/en-us/products/polarion/application-lifecycle-management-alm/), [PTC Codebeamer](https://www.ptc.com/en/about/facts/codebeamer), [CATIA Magic](https://www.3ds.com/products/catia/catia-magic/sysmlv2).
+Sources: [IBM DOORS traceability](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/7.1.0?topic=requirements-traceability), [Siemens Polarion](https://www.siemens.com/en-us/products/polarion/application-lifecycle-management-alm/), [PTC Codebeamer](https://www.ptc.com/en/products/codebeamer), [CATIA Magic](https://www.3ds.com/products/catia/catia-magic/sysmlv2).
 
 # 5. "Why Use an Agent at All?"
 
 This may be the strongest technical objection.
 
-If the required task is "enumerate all reachable requirements, interfaces, components, and tests under explicit relation rules, then flag violations," a deterministic graph engine is more reliable and inspectable than a language model. Recursive queries, typed graph traversals, schema constraints, and rule checks can perform much of that work. The model adds value where text must be interpreted, ambiguous evidence reconciled, or findings explained—not where exact set membership is required.
+If the required task is "enumerate all reachable requirements, interfaces, components, and tests under explicit relation rules, then flag violations," a deterministic graph engine is more reliable and inspectable than a language model. Recursive queries[^postgres], typed graph traversals, schema constraints, and rule checks can perform much of that work. The model adds value where text must be interpreted, ambiguous evidence reconciled, or findings explained—not where exact set membership is required.
 
 A simpler architecture is:
 
@@ -127,11 +127,11 @@ The agent need not execute the graph algorithm or certify itself. This reduces e
 
 A burden of proof therefore falls on the model: show tasks where a language-model reasoning stage adds measured value **beyond** deterministic graph/rule analysis, and where that value survives the increase in cost and false-positive burden.
 
-References: [PostgreSQL recursive queries](https://www.postgresql.org/docs/18/queries-with.html), [W3C SHACL](https://www.w3.org/TR/shacl/).
+References: [PostgreSQL recursive queries](https://www.postgresql.org/docs/current/queries-with.html), [W3C SHACL](https://www.w3.org/TR/shacl/)[^shacl].
 
 # 6. The Proof Problem: What Does Traversal Attestation Actually Prove?
 
-The proposed traversal attestation is the most differentiated idea. It is also the easiest to overclaim.
+The proposed traversal receipt is one candidate for differentiation. It is also the easiest to overclaim.
 
 Suppose the snapshot is \(G_s=(V_s,E_s)\) and the contract defines an allowed relation set, entry nodes, scope limits, and terminal conditions. A deterministic checker can establish that the **recorded traversal** covers the relevant reachable elements under that contract. If independent queries return the same expected reachable set, confidence in implementation correctness increases.
 
@@ -244,7 +244,7 @@ A product that suppresses downstream follow-up warnings to maintain the illusion
 
 # 11. One Acknowledgement Per Individual Action: Safety or Ceremony?
 
-The design's invariant is unusual and intentional: one acknowledgement for each action, displaying all classified findings, including intentional risk and false positives. Even critical warnings may be accepted. Yet acceptance must never grant permissions.
+The proposed policy is unusual and intentional: one acknowledgement for each consequence-bearing individual action, displaying all currently evaluated findings, including intentional risk and false positives. Even critical warnings may be accepted. Yet acceptance must never grant permissions.
 
 This can preserve human agency, but reviewers will ask difficult questions:
 
@@ -290,7 +290,7 @@ The white paper should use *Verified under contract X, snapshot Y, rule set Z*. 
 
 The least complex useful MVP likely needs typed graph assertions, constraints, and source references first. A general symbolic solver should be added only where there is a concrete family of constraints that existing graph rules cannot express efficiently or correctly.
 
-Reference: [Microsoft Z3 Guide](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/).
+Reference: [Microsoft Z3 Guide](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/)[^z3].
 
 # 13. The Security Attack Surface May Grow Faster Than the Assurance Surface
 
@@ -320,7 +320,7 @@ Principle: the verifier must own authoritative state and compute or validate rec
 
 A smaller architecture may be safer because it has fewer privileged moving parts. Compare it empirically.
 
-Reference: [OWASP GenAI LLM Top 10](https://genai.owasp.org/llm-top-10/).
+Reference: [OWASP GenAI LLM Top 10](https://genai.owasp.org/llm-top-10/)[^owasp].
 
 # 14. Economics: The Hidden Cost Is Integration, Not Tokens
 
@@ -390,13 +390,13 @@ No individual element appears unprecedented:
 
 - Cross-checking and audit: established in high-assurance workflows.
 
-**Potentially differentiated:** a *mandatory, source-bounded, independently checked evidence contract* applied to agent decisions, packaged for an individual action with complete current findings, source version, traversal coverage, unresolved checks, and single-use risk acknowledgement that never changes authorization.
+**Potentially differentiated (if empirically demonstrated):** a *mandatory, source-bounded, separately checked evidence contract* applied to agent decisions, packaged for an individual action with complete current findings, source version, traversal coverage, unresolved checks, and single-use risk acknowledgement that never changes authorization.
 
 That is a possible integration innovation. It is **not** proof of market novelty, patentability, or category creation.
 
-The shortest defensible product sentence may be:
+A concise experimental thesis might be:
 
-> An independent evidence-attestation and review layer that verifies whether an AI-assisted engineering change-impact analysis met a versioned graph coverage and validation contract before a reviewer relies on it.
+> A bounded evidence-verification and review layer that checks whether an AI-assisted engineering investigation met a versioned graph coverage and validation contract before a reviewer relies on it.
 
 Notice what this sentence does not require: a proprietary model, an original graph database, a general agent runtime, or custom authorization identity.
 
@@ -491,7 +491,7 @@ Choose quantitative thresholds only after examining base rates and buyer toleran
 
 7. Do risk overrides create a harmful illusion that organizational authorization was granted?
 
-8. Why does every action need an acknowledgement? Show the user-research evidence.
+8. Which consequence-bearing actions need explicit acknowledgement, and when is read-only disclosure sufficient? Show the user-research evidence.
 
 9. How do you prevent sibling-pattern matching from discouraging valid invention?
 
@@ -513,7 +513,7 @@ A strong team should answer these with test artifacts, comparative measurements,
 
 **Stage 0 — Baseline discovery.** Select one real engineering-change workflow and one authoritative source baseline. Inventory existing MBSE/ALM validation and reviewer practices. Identify concrete historic escapes and false positives. Do not pick a pristine demo dataset.
 
-**Stage 1 — Independent deterministic verifier.** Define a versioned graph traversal and evidence contract. Build a read-only service that computes reachable sets, inventories omissions, records source lineage, compares an independently implemented query, and emits an inspectable receipt. It should work without an LLM. This is where most of the technical differentiation can be tested.
+**Stage 1 — Separately implemented deterministic verifier.** Define a versioned graph traversal and evidence contract. Build a read-only service that computes reachable sets, inventories omissions, records source lineage, compares an independently implemented query, and emits an inspectable receipt. It should work without an LLM. This is where most of the technical differentiation can be tested.
 
 **Stage 2 — Attach an off-the-shelf agent.** Have Codex or a managed agent use the same verifier to interpret ambiguous requirements, summarize engineering impact, and connect findings to evidence. Keep model-suggested actions separate from authorization. Assess whether the model actually improves outcomes.
 
@@ -529,7 +529,7 @@ The white paper is strongest as a **trust-boundary thesis** and a **verification
 
 My recommendation is therefore deliberately demanding:
 
-**Preserve the invariants. Shrink the first product. Put it on top of existing tools. Test it against those tools.**
+**Preserve the hypotheses. Start with the smallest testable method. Compare it against existing tools.**
 
 Proceed toward a bespoke harness only if a real pilot establishes all of the following:
 
@@ -555,12 +555,51 @@ Otherwise, the correct outcome may be a small and valuable *assurance product*, 
 
 **Agent platforms:** [Codex](https://developers.openai.com/blog/codex-as-a-platform) · [OpenAI Agents SDK](https://developers.openai.com/api/docs/guides/agents/sdk) · [OpenAI guardrails/approvals](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals) · [Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop) · [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/agents/overview) · [AWS AgentCore policy](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy.html) · [Google agent platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview).
 
-**Engineering systems:** [IBM DOORS Next](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/7.1.0?topic=requirements-traceability) · [Siemens Polarion](https://www.siemens.com/en-us/products/polarion/application-lifecycle-management-alm/) · [PTC Codebeamer](https://www.ptc.com/en/about/facts/codebeamer) · [CATIA Magic](https://www.3ds.com/products/catia/catia-magic/sysmlv2) · [NASA systems engineering](https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/).
+**Engineering systems:** [IBM DOORS Next](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/7.1.0?topic=requirements-traceability) · [Siemens Polarion](https://www.siemens.com/en-us/products/polarion/application-lifecycle-management-alm/) · [PTC Codebeamer](https://www.ptc.com/en/products/codebeamer) · [CATIA Magic](https://www.3ds.com/products/catia/catia-magic/sysmlv2) · [NASA systems engineering](https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/)[^nasa].
 
-**Methods and risks:** [PostgreSQL recursive queries](https://www.postgresql.org/docs/18/queries-with.html) · [W3C SHACL](https://www.w3.org/TR/shacl/) · [Z3 Guide](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/) · [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) · [NIST evaluation probes](https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai).
+**Methods and risks:** [PostgreSQL recursive queries](https://www.postgresql.org/docs/current/queries-with.html) · [W3C SHACL](https://www.w3.org/TR/shacl/) · [Z3 Guide](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/) · [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/) · [NIST evaluation probes](https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai)[^nistprobes].
 
 The referenced documentation supports *reported platform and technique capabilities*, not the red team's judgments about cost, comparative superiority, or market fit. Those judgments are hypotheses for a controlled evaluation.
 
 ---
 
-**Further scrutiny:** [Assurance boundaries]({{ '/assurance-boundaries/' | relative_url }}) · [No-LLM validation first]({{ '/validation/' | relative_url }}) · [Prior art and standards]({{ '/prior-art/' | relative_url }}).
+**Further scrutiny:** [Reference and claim audit]({{ '/reference-audit/' | relative_url }}) · [Assurance boundaries]({{ '/assurance-boundaries/' | relative_url }}) · [No-LLM validation first]({{ '/validation/' | relative_url }}) · [Prior art and standards]({{ '/prior-art/' | relative_url }}).
+
+
+## Source footnotes and acknowledgements
+
+These notes acknowledge existing tools, standards, and methods at their first substantive mention. Sources establish only their described scope; they do not validate this research architecture.
+
+[^codex]: OpenAI Codex is a candidate coding-agent host, not a demonstrated MBSE assurance solution. Vendor overview: [Codex as a Platform](https://developers.openai.com/blog/codex-as-a-platform); [source repository](https://github.com/openai/codex).
+
+[^agents]: OpenAI Agents SDK documents tool orchestration, guardrails, approvals, and tracing; it does not certify external engineering-graph completeness. [SDK](https://developers.openai.com/api/docs/guides/agents/sdk); [guardrails and approvals](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals).
+
+[^msframework]: Microsoft's agent framework and workflow documentation provide relevant orchestration and review features; compatibility must be checked by language/runtime version. [Framework](https://learn.microsoft.com/en-us/agent-framework/workflows/); [human-in-the-loop](https://learn.microsoft.com/en-us/agent-framework/workflows/human-in-the-loop).
+
+[^foundry]: Microsoft Foundry Agent Service is a managed-agent alternative, not an independently validated graph verifier. [Official overview](https://learn.microsoft.com/en-us/azure/foundry/agents/overview).
+
+[^aws]: AWS AgentCore provides managed agent capabilities including policy tooling; the exact applicability to this research is untested. [Policy documentation](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy.html).
+
+[^google]: Google's agent tooling is an alternative platform/SDK, not a verified implementation of this research contract. [ADK documentation](https://google.github.io/adk-docs/); [managed platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview).
+
+[^postgres]: PostgreSQL supports recursive common-table expressions over modeled relationships. Completeness is conditional on query semantics and source data. [Official recursive-query documentation](https://www.postgresql.org/docs/current/queries-with.html).
+
+[^shacl]: W3C SHACL specifies RDF graph shape constraints; pySHACL is an available implementation. Shape validation does not discover arbitrary absent real-world links. [W3C specification](https://www.w3.org/TR/shacl/); [implementation](https://github.com/RDFLib/pySHACL).
+
+[^z3]: Z3 is a constraint solver. SAT/UNSAT/UNKNOWN apply to the supplied encoding, not physical truth; timeouts need explicit handling. [Z3 programming guide](https://microsoft.github.io/z3guide/programming/Z3%20Python/Introduction/); [source](https://github.com/Z3Prover/z3).
+
+[^nasa]: NASA's Systems Engineering Handbook and traceability guidance motivate requirements, interfaces, and verification practice; they do not validate this proposed harness. [Handbook](https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/); [bidirectional traceability guidance](https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695427/SWE-052%2B-%2BBidirectional%2BTraceability).
+
+[^owasp]: OWASP's LLM/GenAI risks identify prompt injection and excessive agency; a risk taxonomy is not a tested mitigation. [Official LLM Top 10](https://genai.owasp.org/llm-top-10/).
+
+[^codebeamer]: PTC describes Codebeamer requirements, traceability, risk, and ALM features. These are vendor claims, not a verified instance of this research's coverage receipt. [Official product page](https://www.ptc.com/en/products/codebeamer).
+
+[^ibm]: IBM documents DOORS Next trace links, impact analysis, and coverage reporting. The exact documentation URL was indexed but direct automated fetch was restricted during this audit. [IBM traceability documentation](https://www.ibm.com/docs/en/engineering-lifecycle-management-suite/doors-next/7.1.0?topic=requirements-traceability).
+
+[^siemens]: Siemens describes Polarion ALM requirements, workflow and traceability capabilities; feature breadth/versions require hands-on validation. [Official ALM page](https://www.siemens.com/en-us/products/polarion/application-lifecycle-management-alm/).
+
+[^catia]: Dassault describes CATIA SysML v2 modeling and text/diagram synchronization. Conformance percentages on the vendor page are marketing claims and were not independently tested here. [Official page](https://www.3ds.com/products/catia/catia-magic/sysmlv2).
+
+[^nistprobes]: NIST describes adversarial evaluation probes using rubric-based LM judges against curated reference corpora. Do not call them independent deterministic verifiers. [NIST project](https://www.nist.gov/programs-projects/building-evaluation-probes-agentic-ai).
+
+[^drafting]: This adversarial critique was AI-assisted and reflects questions raised in the research conversation. It is a critique to test, not independent peer review or an empirical comparison of products.

@@ -7,7 +7,7 @@ description: Textual SysML v2 architecture model, modular packages, and known mo
 
 # SysML v2 reference architecture
 
-The repository includes a **textual SysML v2 representation** of the proposed evidence-gated agentic architecture, its MBSE reference application, adversarial cases, requirements, and declared verification cases.
+The repository includes a **textual SysML v2[^sysml] representation** of the proposed evidence-gated agentic architecture, its MBSE reference application, adversarial cases, requirements, and declared verification cases.
 
 [**Open the complete model**](https://github.com/madhatter5501/Exploring-AI-in-MBSE/blob/main/models/Evidence_Attested_Agentic_Harness.sysml) · [Browse all model files](https://github.com/madhatter5501/Exploring-AI-in-MBSE/tree/main/models) · [Import guidance](https://github.com/madhatter5501/Exploring-AI-in-MBSE/blob/main/models/HOLARCH_IMPORT_GUIDE.md)
 
@@ -21,7 +21,7 @@ The repository includes a **textual SysML v2 representation** of the proposed ev
 
 ## What has been verified
 
-The consolidated textual model was previously checked with the [OpenSysML / MBSE4U online SysML v2 parser](https://mbse4u.com/tools/sysml-check/) and returned zero reported syntax diagnostics for that snapshot.
+The consolidated textual model was previously checked with the [OpenSysML / MBSE4U online SysML v2 parser](https://mbse4u.com/tools/sysml-check/)[^mbse4u] and returned zero reported syntax diagnostics for that snapshot.
 
 That means **the source parsed in one tool**. It does **not** mean:
 
@@ -42,3 +42,12 @@ The white paper has evolved since earlier model drafts. Traceability review and 
 5. File a reproducible discrepancy—including tool version and minimized excerpt—as a GitHub issue.
 
 The project favors counterexamples and reproducible defects over an unsupported “100% complete” status.
+
+
+## Source footnotes and acknowledgements
+
+These notes acknowledge existing tools, standards, and methods at their first substantive mention. Sources establish only their described scope; they do not validate this research architecture.
+
+[^sysml]: OMG SysML v2 is an established modeling language. Parser acceptance or tool export is not validation of engineering-model semantics. [OMG v2 specification](https://www.omg.org/spec/SysML/2.0); [reference releases](https://github.com/Systems-Modeling/SysML-v2-Release).
+
+[^mbse4u]: MBSE4U offers an online SysML v2 syntax checker; passing one parser is not independent model validation. [Checker](https://mbse4u.com/tools/sysml-check/).

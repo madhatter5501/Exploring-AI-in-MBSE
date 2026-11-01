@@ -54,4 +54,11 @@ The model itself is not assumed complete. The first experiment tests whether mis
 
 This project does **not** commit to a particular graph database, UI, model provider, workflow engine, or solver. That choice follows the Phase 0 study and build-versus-buy matrix.
 
-[White paper]({{ '/whitepaper/' | relative_url }}) · [Validation]({{ '/validation/' | relative_url }}) · [SysML v2 model]({{ '/model/' | relative_url }})
+[White paper]({{ '/whitepaper/' | relative_url }}) · [Validation]({{ '/validation/' | relative_url }}) · [SysML v2[^sysml] model]({{ '/model/' | relative_url }})
+
+
+## Source footnotes and acknowledgements
+
+These notes acknowledge existing tools, standards, and methods at their first substantive mention. Sources establish only their described scope; they do not validate this research architecture.
+
+[^sysml]: OMG SysML v2 is an established modeling language. Parser acceptance or tool export is not validation of engineering-model semantics. [OMG v2 specification](https://www.omg.org/spec/SysML/2.0); [reference releases](https://github.com/Systems-Modeling/SysML-v2-Release).

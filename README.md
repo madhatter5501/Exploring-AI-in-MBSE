@@ -10,13 +10,14 @@ An open investigation into **evidence-gated agentic systems**: how can an AI-ass
 
 ## Start here
 
-- [Research website](https://madhatter5501.github.io/Exploring-AI-in-MBSE/) — GitHub Pages site (publication pending).
+- GitHub Pages website — source is in [`docs/`](docs/index.md); publication will be enabled in the repository's Pages settings.
 - [Architectural white paper](docs/whitepaper.md) — revised working draft, not peer reviewed.
 - [Adversarial review](docs/adversarial-review.md) — arguments against building the harness and known failure modes.
+- [Reference and claim audit](docs/reference-audit.md) — checked links, source-scope corrections, footnotes, and unresolved assertions.
 - [Assurance boundaries](docs/assurance-boundaries.md) — what coverage and evidence checks do *not* prove.
 - [Validation plan](docs/validation.md) — Phase 0 historical escapes, baselines, and proposed falsification tests.
 - [Research roadmap](docs/roadmap.md) — near-term milestones and stop/reframe decisions.
-- [SysML v2 model](models/Evidence_Attested_Agentic_Harness.sysml) — formalized architecture; executable product behavior is **not** implied.
+- [SysML v2 model](models/Evidence_Attested_Agentic_Harness.sysml)[^sysml] — formalized architecture; executable product behavior is **not** implied.
 
 ## The central question
 
@@ -35,7 +36,7 @@ This project distinguishes:
 | Item | Status |
 |---|---|
 | Architecture and trust boundaries | Proposed |
-| SysML v2 textual syntax | Parsed with the strict OpenSysML/MBSE4U checker; cross-tool import not established |
+| SysML v2 textual syntax | Parsed with the strict OpenSysML/MBSE4U checker[^mbse4u]; cross-tool import not established |
 | Requirements and verification cases | Declared in model; **not executed** |
 | Real-world completeness of source graphs | Unknown |
 | Independent corroboration and sibling-pattern benefit | Hypotheses |
@@ -64,3 +65,9 @@ Issues describing reproducible counterexamples, prior art, architectural objecti
 This repository documents a research idea, not a production service, safety case, or qualified verification tool. Third-party standards, papers, and tools are cited for context; their existence and capabilities should not be interpreted as endorsements of this work.
 
 Licensing and reuse terms will be selected deliberately; public visibility alone does not grant an open-source license.
+
+## Source footnotes
+
+[^sysml]: [OMG SysML v2](https://www.omg.org/spec/SysML/2.0) is the external modeling-language standard; syntax conformance and independent model assurance are different questions.
+
+[^mbse4u]: [MBSE4U's online checker](https://mbse4u.com/tools/sysml-check/) is the reported parser used on an earlier snapshot; a second independent tool has not yet validated this export.
