@@ -1,0 +1,10 @@
+title: Exploring AI in MBSE
+description: Independent research on evidence-gated agentic systems, with MBSE as the reference application
+url: "https://madhatter5501.github.io"
+baseurl: "/Exploring-AI-in-MBSE"
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+exclude:
+  - README.md

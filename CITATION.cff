@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you discuss this working research proposal, cite the repository and its version."
+title: "Exploring AI in MBSE: Evidence-Gated Agentic Systems"
+authors:
+  - family-names: Steinwand
+    given-names: Corey
+repository-code: "https://github.com/madhatter5501/Exploring-AI-in-MBSE"
+url: "https://madhatter5501.github.io/Exploring-AI-in-MBSE/"
+abstract: "Independent work-in-progress research on evidence-gated agentic architectures, with Model-Based Systems Engineering as the reference application."
+keywords:
+  - systems-engineering
+  - MBSE
+  - SysML-v2
+  - AI-agents
+  - assurance

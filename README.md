@@ -6,7 +6,7 @@ An open investigation into **evidence-gated agentic systems**: how can an AI-ass
 
 **Model-Based Systems Engineering (MBSE)** is the reference application. The underlying questions—bounded scope, trusted inputs, permission boundaries, evidence provenance, and independent verification—are intended to apply more generally.
 
-**Research by Corey Steinwand.** This is personal, independent research and does not represent or imply endorsement by any employer.
+**Research by Corey Steinwand.** This is a personal research exploration, shared in progress.
 
 ## Start here
 
@@ -61,6 +61,6 @@ Issues describing reproducible counterexamples, prior art, architectural objecti
 
 ## Scope and attribution
 
-This repository documents a research idea, not a production service, safety case, tool qualification, or employer initiative. Third-party standards, papers, and tools are cited for context; their existence and capabilities should not be interpreted as endorsements of this work.
+This repository documents a research idea, not a production service, safety case, or qualified verification tool. Third-party standards, papers, and tools are cited for context; their existence and capabilities should not be interpreted as endorsements of this work.
 
 Licensing and reuse terms will be selected deliberately; public visibility alone does not grant an open-source license.

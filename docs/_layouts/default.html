@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <meta name="theme-color" content="#0b182a">
+  <title>{% if page.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}</title>
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}" aria-label="Exploring AI in MBSE home">
+        <span class="brand-mark" aria-hidden="true">∴</span>
+        <span class="brand-name">Exploring AI <small>in MBSE</small></span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="{{ '/' | relative_url }}">Overview</a>
+        <a href="{{ '/whitepaper/' | relative_url }}">White paper</a>
+        <a href="{{ '/adversarial-review/' | relative_url }}">Critique</a>
+        <a href="{{ '/validation/' | relative_url }}">Validation</a>
+        <a href="{{ '/model/' | relative_url }}">SysML model</a>
+      </nav>
+      <a class="header-github" href="https://github.com/madhatter5501/Exploring-AI-in-MBSE" rel="noopener">GitHub ↗</a>
+    </div>
+  </header>
+  <main id="content" class="shell page-content {% if page.url == '/' %}landing{% else %}article-page{% endif %}">
+    {{ content }}
+  </main>
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <div class="footer-title">A research notebook, not a product launch.</div>
+        <p>Personal research by Corey Steinwand. This site documents an exploration, not a product, certified assurance system, or peer-reviewed result.</p>
+      </div>
+      <div class="footer-links">
+        <a href="{{ '/prior-art/' | relative_url }}">Sources & prior art</a>
+        <a href="{{ '/research-log/' | relative_url }}">Research log</a>
+        <a href="{{ '/assurance-boundaries/' | relative_url }}">Assurance boundaries</a>
+        <a href="https://github.com/madhatter5501/Exploring-AI-in-MBSE/issues">Discuss / challenge ↗</a>
+      </div>
+    </div>
+    <div class="shell footer-bottom">Working draft · November 2026 · Claims remain open to falsification.</div>
+  </footer>
+</body>
+</html>
